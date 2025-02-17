@@ -13,11 +13,21 @@ const SignUpForm = () => {
       <InputForm
         label="Nome de usuário"
         placeholder="Escolha um nome de usuário"
+        hint="Pense bem! Este será seu nome fixo na plataforma."
       />
 
-      <InputForm label="E-mail" placeholder="Digite seu e-mail" />
+      <InputForm
+        label="E-mail"
+        placeholder="Digite seu e-mail"
+        hint="O e-mail informado será fixo e não poderá ser atualizado."
+      />
 
-      <InputForm type="password" label="Senha" placeholder="Digite sua senha" />
+      <InputForm
+        type="password"
+        label="Senha"
+        placeholder="Digite sua senha"
+        hint="Defina uma senha segura. Ela não poderá ser alterada depois."
+      />
 
       <InputForm
         type="password"

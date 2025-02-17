@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import ThemeSwitch from "@/app/components/theme-switch";
-import Header from "@/app/(pages)/signin/components/header";
+import AuthHeader from "@/app/(pages)/signin/components/auth-header";
 import SignInForm from "@/app/(pages)/signin/components/signin-form";
 import SignUpForm from "@/app/(pages)/signin/components/signup-form";
 
@@ -14,7 +14,7 @@ const SignInPage = () => {
     <main className="flex min-h-screen w-full items-center justify-center p-5">
       <div className="flex w-full max-w-md flex-col items-center gap-5">
         <div className="flex items-center gap-5">
-          <Header formType={formType} setFormType={setFormType} />
+          <AuthHeader formType={formType} setFormType={setFormType} />
           <ThemeSwitch />
         </div>
 

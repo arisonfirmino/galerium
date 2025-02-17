@@ -6,12 +6,12 @@ import Image from "next/image";
 
 import FormToggleButton from "@/app/(pages)/signin/components/form-toggle-button";
 
-interface HeaderProps {
+interface AuthHeaderProps {
   formType: "login" | "register";
   setFormType: (value: "login" | "register") => void;
 }
 
-const Header = ({ formType, setFormType }: HeaderProps) => {
+const AuthHeader = ({ formType, setFormType }: AuthHeaderProps) => {
   const { theme } = useTheme();
 
   const logo =
@@ -42,4 +42,4 @@ const Header = ({ formType, setFormType }: HeaderProps) => {
   );
 };
 
-export default Header;
+export default AuthHeader;

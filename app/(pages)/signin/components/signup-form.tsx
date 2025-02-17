@@ -17,9 +17,10 @@ const SignUpForm = () => {
 
       <InputForm label="E-mail" placeholder="Digite seu e-mail" />
 
-      <InputForm label="Senha" placeholder="Digite sua senha" />
+      <InputForm type="password" label="Senha" placeholder="Digite sua senha" />
 
       <InputForm
+        type="password"
         label="Confirme sua senha"
         placeholder="Digite sua senha novamente"
       />

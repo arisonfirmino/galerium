@@ -9,7 +9,7 @@ const SignInForm = () => {
         placeholder="Digite seu e-mail ou nome de usuário"
       />
 
-      <InputForm label="Senha" placeholder="Digite sua senha" />
+      <InputForm type="password" label="Senha" placeholder="Digite sua senha" />
 
       <SubmitButton>Entrar</SubmitButton>
     </form>

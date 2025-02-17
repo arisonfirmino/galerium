@@ -21,7 +21,7 @@ const FormToggleButton = ({
       className={cn(
         formType === type
           ? "border-foreground"
-          : "max-w-10 text-muted-foreground hover:bg-gray-100",
+          : "max-w-10 text-muted-foreground hover:bg-gray-100 dark:hover:bg-black",
       )}
     >
       {type === "login" ? <LogInIcon /> : <UserPlusIcon />}

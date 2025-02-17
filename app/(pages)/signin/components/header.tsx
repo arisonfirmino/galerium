@@ -1,3 +1,7 @@
+"use client";
+
+import { useTheme } from "next-themes";
+
 import Image from "next/image";
 
 import FormToggleButton from "@/app/(pages)/signin/components/form-toggle-button";
@@ -8,6 +12,11 @@ interface HeaderProps {
 }
 
 const Header = ({ formType, setFormType }: HeaderProps) => {
+  const { theme } = useTheme();
+
+  const logo =
+    theme === "dark" ? "/galerium-logo-white.png" : "/galerium-logo-black.png";
+
   return (
     <header className="flex items-center gap-5 rounded-2xl border bg-card p-1.5">
       <FormToggleButton
@@ -17,7 +26,7 @@ const Header = ({ formType, setFormType }: HeaderProps) => {
       />
 
       <Image
-        src="/galerium-logo.png"
+        src={logo}
         alt="Galerium Logo"
         height={500}
         width={500}

@@ -1,5 +1,9 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -7,8 +11,12 @@ import * as yup from "yup";
 import InputForm from "@/app/components/input-form";
 import SubmitButton from "@/app/components/submit-button";
 
+import { authenticateUser } from "@/app/helpers/authenticateUser";
+
+import { toast } from "sonner";
+
 const schema = yup.object({
-  emailOrUsername: yup
+  identifier: yup
     .string()
     .required(
       "O e-mail ou nome de usuário é obrigatório. Por favor, informe um dos dois.",
@@ -23,18 +31,57 @@ const schema = yup.object({
 type FormData = yup.InferType<typeof schema>;
 
 const SignInForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
+    setError,
     reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: FormData) => {
+    setIsLoading(true);
+
+    const authenticate = await authenticateUser({
+      identifier: data.identifier,
+      password: data.password,
+    });
+
+    if ("error" in authenticate) {
+      if (authenticate.field === "identifier") {
+        setError("identifier", {
+          type: "manual",
+          message: authenticate.error,
+        });
+      }
+
+      if (authenticate.field === "password") {
+        setError("password", {
+          type: "manual",
+          message: authenticate.error,
+        });
+      }
+
+      setIsLoading(false);
+      return;
+    }
+
+    await signIn("credentials", {
+      redirect: false,
+      identifier: data.identifier,
+      password: data.password,
+    });
+
     reset();
+    setIsLoading(false);
+    router.replace("/");
+    toast("Bem vindo(a) de volta");
   };
 
   return (
@@ -45,8 +92,8 @@ const SignInForm = () => {
       <InputForm
         label="E-mail ou nome de usuário"
         placeholder="Digite seu e-mail ou nome de usuário"
-        register={{ ...register("emailOrUsername") }}
-        error={errors.emailOrUsername}
+        register={{ ...register("identifier") }}
+        error={errors.identifier}
       />
 
       <InputForm
@@ -57,7 +104,7 @@ const SignInForm = () => {
         error={errors.password}
       />
 
-      <SubmitButton>Entrar</SubmitButton>
+      <SubmitButton isLoading={isLoading}>Entrar</SubmitButton>
     </form>
   );
 };

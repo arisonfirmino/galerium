@@ -1,7 +1,12 @@
+"use client";
+
+import { useSession } from "next-auth/react";
+
 import { cn } from "@/app/lib/utils";
 
 import { Card, CardHeader, CardFooter } from "@/app/components/ui/card";
 import Identity from "@/app/components/profile/identity";
+import FollowButton from "@/app/components/profile/follow-button";
 import Bio from "@/app/components/profile/bio";
 import Location from "@/app/components/profile/location";
 import Count from "@/app/components/profile/count";
@@ -13,12 +18,15 @@ interface UserProfileProps {
 }
 
 const UserProfile = ({ user }: UserProfileProps) => {
+  const { data: session } = useSession();
+
   return (
     <Card
       className={cn("flex h-[170px] max-w-md flex-col justify-between p-2.5")}
     >
-      <CardHeader>
+      <CardHeader className={cn("flex items-center justify-between")}>
         <Identity user={user} />
+        {session?.user.id !== user.id && <FollowButton />}
       </CardHeader>
 
       <Bio bio={user.bio} />

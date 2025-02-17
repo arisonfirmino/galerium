@@ -1,11 +1,18 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import InputForm from "@/app/components/input-form";
 import SubmitButton from "@/app/components/submit-button";
+
+import { createAccount } from "@/app/actions/user";
+
+import { toast } from "sonner";
 
 const schema = yup.object({
   firstName: yup
@@ -47,18 +54,54 @@ const schema = yup.object({
 type FormData = yup.InferType<typeof schema>;
 
 const SignUpForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
+    setError,
     reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: FormData) => {
+    setIsLoading(true);
+
+    const result = await createAccount({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      username: data.username,
+      email: data.email,
+      password: data.password,
+    });
+
+    if (result?.error) {
+      if (result.type === "username") {
+        setError("username", {
+          type: "manual",
+          message: result.error,
+        });
+      }
+
+      if (result.type === "email") {
+        setError("email", {
+          type: "manual",
+          message: result.error,
+        });
+      }
+
+      setIsLoading(false);
+      return;
+    }
+
     reset();
+    setIsLoading(false);
+    router.replace(`/${data.username}`);
+    toast(`Bem vido(a), ${data.firstName} ${data.lastName}.`);
   };
 
   return (
@@ -115,7 +158,7 @@ const SignUpForm = () => {
         error={errors.passwordConfirmation}
       />
 
-      <SubmitButton>Enviar</SubmitButton>
+      <SubmitButton isLoading={isLoading}>Enviar</SubmitButton>
     </form>
   );
 };

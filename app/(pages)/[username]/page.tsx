@@ -1,6 +1,8 @@
-import UserProfile from "@/app/components/profile/user-profile";
 import { db } from "@/app/lib/prisma";
 import { redirect } from "next/navigation";
+
+import Container from "@/app/components/container";
+import UserProfile from "@/app/components/profile/user-profile";
 
 const Timeline = async ({
   params,
@@ -16,9 +18,9 @@ const Timeline = async ({
   if (!user) redirect("/");
 
   return (
-    <main className="flex min-h-screen w-full items-center justify-center">
+    <Container>
       <UserProfile user={user} />
-    </main>
+    </Container>
   );
 };
 

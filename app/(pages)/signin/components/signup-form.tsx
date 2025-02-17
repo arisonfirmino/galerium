@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -97,6 +98,12 @@ const SignUpForm = () => {
       setIsLoading(false);
       return;
     }
+
+    await signIn("credentials", {
+      redirect: false,
+      identifier: data.email,
+      password: data.password,
+    });
 
     reset();
     setIsLoading(false);

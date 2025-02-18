@@ -50,3 +50,44 @@ export const createAccount = async ({
 
   revalidatePath("/");
 };
+
+interface UpdateUserDataProps {
+  userId: string;
+  firstName?: string;
+  lastName?: string;
+  bio?: string;
+  location?: string;
+}
+
+export const updateUserData = async ({
+  userId,
+  firstName,
+  lastName,
+  bio,
+  location,
+}: UpdateUserDataProps) => {
+  if (!userId) return { error: "O ID do usuário é obrigatório." };
+
+  const user = await db.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!user) return { error: "Usuário não encontrado." };
+
+  const data = { firstName, lastName, bio, location };
+
+  const filteredData = Object.fromEntries(
+    Object.entries(data).filter(([, value]) => value !== undefined),
+  );
+
+  if (Object.keys(filteredData).length === 0) {
+    return { error: "Nenhum dado válido foi fornecido para atualização." };
+  }
+
+  await db.user.update({
+    where: { id: userId },
+    data: filteredData,
+  });
+
+  revalidatePath("/");
+};

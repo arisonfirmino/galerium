@@ -29,7 +29,7 @@ const ProfilePage = async () => {
 
       <Separator className={cn("max-w-[698px]")} />
 
-      <Settings />
+      <Settings user={user} />
     </Container>
   );
 };

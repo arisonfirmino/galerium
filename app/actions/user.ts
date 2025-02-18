@@ -91,3 +91,28 @@ export const updateUserData = async ({
 
   revalidatePath("/");
 };
+
+export const updateUserAvatar = async ({
+  userId,
+  image,
+}: {
+  userId: string;
+  image: string;
+}) => {
+  if (!userId) return { error: "O ID do usuário é obrigatório." };
+
+  const user = await db.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!user) return { error: "Usuário não encontrado." };
+
+  if (!image) return { error: "Imagem não fornecida." };
+
+  await db.user.update({
+    where: { id: userId },
+    data: { image },
+  });
+
+  revalidatePath("/");
+};

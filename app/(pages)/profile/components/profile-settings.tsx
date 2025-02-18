@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/app/components/ui/accordion";
+import ProfileImageManager from "@/app/(pages)/profile/components/profile-image-manager";
 import ProfileEditForm from "@/app/(pages)/profile/components/profile-edit-form";
 
 import { UserPenIcon } from "lucide-react";
@@ -26,7 +27,8 @@ const ProfileSettings = ({ user }: ProfileSettingsProps) => {
             Editar perfil
           </div>
         </AccordionTrigger>
-        <AccordionContent>
+        <AccordionContent className={cn("space-y-3")}>
+          <ProfileImageManager user={user} />
           <ProfileEditForm user={user} />
         </AccordionContent>
       </AccordionItem>

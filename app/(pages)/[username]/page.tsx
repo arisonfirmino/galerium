@@ -7,6 +7,7 @@ import Container from "@/app/components/container";
 import UserProfile from "@/app/components/profile/user-profile";
 import ProfileActions from "@/app/(pages)/[username]/components/profile-actions";
 import ProfileControls from "@/app/(pages)/[username]/components/profile-controls";
+import PaginationControls from "@/app/(pages)/[username]/components/pagination-controls";
 
 const Timeline = async ({
   params,
@@ -32,6 +33,7 @@ const Timeline = async ({
         ) : (
           <ProfileActions />
         )}
+        <PaginationControls />
       </div>
     </Container>
   );

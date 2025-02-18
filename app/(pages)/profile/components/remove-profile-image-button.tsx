@@ -23,7 +23,12 @@ const RemoveProfileImageButton = ({ userId }: { userId: string }) => {
   };
 
   return (
-    <Button onClick={handleDelete} variant="secondary" className={cn("w-full")}>
+    <Button
+      onClick={handleDelete}
+      disabled={isLoading}
+      variant="secondary"
+      className={cn("w-full")}
+    >
       {isLoading ? "Carregando" : "Remover foto"}
     </Button>
   );

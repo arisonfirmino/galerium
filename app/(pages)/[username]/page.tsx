@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import Container from "@/app/components/container";
 import UserProfile from "@/app/components/profile/user-profile";
+import ProfileActions from "@/app/(pages)/[username]/components/profile-actions";
 
 const Timeline = async ({
   params,
@@ -19,7 +20,10 @@ const Timeline = async ({
 
   return (
     <Container>
-      <UserProfile user={user} />
+      <div className="w-full max-w-md space-y-5">
+        <UserProfile user={user} />
+        <ProfileActions />
+      </div>
     </Container>
   );
 };

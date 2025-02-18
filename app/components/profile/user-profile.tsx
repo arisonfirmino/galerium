@@ -21,9 +21,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
   const { data: session } = useSession();
 
   return (
-    <Card
-      className={cn("flex h-[170px] max-w-md flex-col justify-between p-2.5")}
-    >
+    <Card className={cn("flex h-[170px] flex-col justify-between p-2.5")}>
       <CardHeader className={cn("flex items-center justify-between")}>
         <Identity user={user} />
         {session?.user.id !== user.id && <FollowButton />}

@@ -4,13 +4,13 @@ export declare module "next-auth" {
       id: string;
       username: string;
       email: string;
-      image: string;
+      image: string | null;
     };
   }
 
   interface User extends AdapterUser {
     id: string;
     username: string;
-    image: string;
+    image: string | null;
   }
 }

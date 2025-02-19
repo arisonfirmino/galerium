@@ -1,6 +1,5 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 
 import Image from "next/image";
@@ -12,8 +11,14 @@ import { Button } from "@/app/components/ui/button";
 
 import { HomeIcon, UserIcon } from "lucide-react";
 
-const PageToggleButton = ({ page }: { page: "timeline" | "profile" }) => {
-  const { data: session } = useSession();
+import { User } from "@prisma/client";
+
+interface PageToggleButtonProps {
+  page: "timeline" | "profile";
+  user: Pick<User, "username" | "image">;
+}
+
+const PageToggleButton = ({ page, user }: PageToggleButtonProps) => {
   const pathname = usePathname();
 
   const active =
@@ -27,15 +32,13 @@ const PageToggleButton = ({ page }: { page: "timeline" | "profile" }) => {
         active ? "border-foreground" : "max-w-10 text-muted-foreground",
       )}
     >
-      <Link
-        href={page === "profile" ? "/profile" : `/${session?.user.username}`}
-      >
+      <Link href={page === "profile" ? "/profile" : `/${user?.username}`}>
         {page === "timeline" ? (
           <HomeIcon />
-        ) : session?.user.image ? (
+        ) : user.image ? (
           <Image
-            src={session.user.image}
-            alt={session.user.username}
+            src={user.image}
+            alt={user.username}
             height={500}
             width={500}
             className="aspect-square min-w-4 max-w-4 rounded-full"

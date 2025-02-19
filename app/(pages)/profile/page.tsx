@@ -9,6 +9,7 @@ import Container from "@/app/components/container";
 import UserProfile from "@/app/components/profile/user-profile";
 import { Separator } from "@/app/components/ui/separator";
 import Settings from "@/app/(pages)/profile/components/settings";
+import Gallery from "@/app/components/gallery";
 
 const ProfilePage = async () => {
   const session = await getServerSession(authOptions);
@@ -23,8 +24,12 @@ const ProfilePage = async () => {
 
   return (
     <Container>
-      <div className="w-full max-w-md">
-        <UserProfile user={user} />
+      <div className="flex w-full justify-center gap-5">
+        <div className="w-full max-w-md">
+          <UserProfile user={user} />
+        </div>
+
+        <Gallery gallery={user.gallery} />
       </div>
 
       <Separator className={cn("max-w-[698px]")} />

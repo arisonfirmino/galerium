@@ -20,7 +20,26 @@ model User {
   location String?
   gallery  String[]
 
+  comments         Comment[] @relation("author")
+  receivedComments Comment[] @relation("receivedComments")
+
   created_at DateTime @default(now())
 
   @@map("users")
+}
+
+model Comment {
+  id String @id @default(cuid()) @map("_id")
+
+  author   User   @relation("author", fields: [authorId], references: [id])
+  authorId String
+
+  recipient   User   @relation("receivedComments", fields: [recipientId], references: [id])
+  recipientId String
+
+  text String
+
+  created_at DateTime @default(now())
+
+  @@map("comments")
 }

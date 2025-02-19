@@ -10,6 +10,7 @@ import ProfileControls from "@/app/(pages)/[username]/components/profile-control
 import Gallery from "@/app/components/gallery";
 import GalleryPlaceholder from "@/app/components/gallery-placeholder";
 import PaginationControls from "@/app/(pages)/[username]/components/pagination-controls";
+import CommentsList from "@/app/components/comments/comments-list";
 
 const Timeline = async ({
   params,
@@ -20,6 +21,9 @@ const Timeline = async ({
 
   const user = await db.user.findUnique({
     where: { username: resolvedParams.username },
+    include: {
+      receivedComments: { include: { author: true } },
+    },
   });
 
   if (!user) redirect("/");
@@ -31,11 +35,20 @@ const Timeline = async ({
       <section className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         <div className="w-full max-w-md space-y-5">
           <UserProfile user={user} />
-          {session?.user.id === user.id ? (
-            <ProfileControls />
-          ) : (
-            <ProfileActions />
-          )}
+          {session &&
+            (session.user.id === user.id ? (
+              <ProfileControls />
+            ) : (
+              <ProfileActions
+                authorId={session.user.id}
+                recipientId={user.id}
+                recipientUsername={user.username}
+              />
+            ))}
+        </div>
+
+        <div className="bottom-10 right-10 flex w-full md:fixed md:max-w-sm md:justify-end">
+          <CommentsList comments={user.receivedComments} />
         </div>
 
         {user.gallery.length > 0 ? (

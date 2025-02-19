@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/app/components/ui/accordion";
+import SignOutButton from "@/app/(pages)/profile/components/signout-button";
 
 import { ChartNoAxesCombinedIcon } from "lucide-react";
 
@@ -19,7 +20,9 @@ const UserActivity = () => {
             Sua atividade
           </div>
         </AccordionTrigger>
-        <AccordionContent>user activity</AccordionContent>
+        <AccordionContent>
+          <SignOutButton />
+        </AccordionContent>
       </AccordionItem>
     </Accordion>
   );

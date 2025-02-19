@@ -33,7 +33,7 @@ const ProfilePage = async () => {
           {user.receivedComments.length > 0 ? (
             <CommentsList comments={user.receivedComments} />
           ) : (
-            <div className="h-10 text-center">
+            <div className="flex h-10 items-center justify-center">
               <p className="text-sm text-muted-foreground">
                 Nenhum comentário recebido ainda.
               </p>

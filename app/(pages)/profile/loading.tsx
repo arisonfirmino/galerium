@@ -19,7 +19,7 @@ const Loading = () => {
 
       <Separator className="w-full max-w-[698px]" />
 
-      <div className="flex w-full max-w-[698px] items-center gap-5">
+      <div className="flex w-full max-w-[698px] flex-col items-center gap-5 md:flex-row">
         <Skeleton className="h-[52px] w-full" />
         <Skeleton className="h-[52px] w-full" />
         <Skeleton className="h-[52px] w-full" />

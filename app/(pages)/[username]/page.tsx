@@ -47,9 +47,11 @@ const Timeline = async ({
             ))}
         </div>
 
-        <div className="bottom-10 right-10 flex w-full md:fixed md:max-w-sm md:justify-end">
-          <CommentsList comments={user.receivedComments} />
-        </div>
+        {user.receivedComments.length > 0 && (
+          <div className="bottom-10 right-10 flex w-full md:fixed md:max-w-sm md:justify-end">
+            <CommentsList comments={user.receivedComments} />
+          </div>
+        )}
 
         {user.gallery.length > 0 ? (
           <Gallery gallery={user.gallery} />

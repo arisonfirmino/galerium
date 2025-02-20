@@ -19,7 +19,7 @@ const Gallery = ({ gallery }: { gallery: string[] }) => {
       className={cn("w-full md:max-w-[230px]")}
     >
       <CarouselContent>
-        {gallery.map((image) => (
+        {[...gallery].reverse().map((image) => (
           <CarouselItem
             key={image}
             className={cn(

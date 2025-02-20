@@ -6,7 +6,7 @@ import { cn } from "@/app/lib/utils";
 
 import { Button } from "@/app/components/ui/button";
 
-import { deleteProfileImage } from "@/app/helpers/deleteProfileImage";
+import { deleteProfileImage } from "@/app/helpers/cloudinary";
 
 import { toast } from "sonner";
 

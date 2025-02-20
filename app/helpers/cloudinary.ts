@@ -28,3 +28,18 @@ export const deleteProfileImage = async ({ userId }: { userId: string }) => {
 
   revalidatePath("/");
 };
+
+export const deleteImageFromCloudinary = async ({
+  image,
+}: {
+  image: string;
+}) => {
+  const publicId = image
+    .replace(
+      /^https?:\/\/res\.cloudinary\.com\/[^/]+\/image\/upload\/v\d+\//,
+      "",
+    )
+    .replace(/\.\w+$/, "");
+
+  await cloudinary.uploader.destroy(publicId);
+};

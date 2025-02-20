@@ -22,6 +22,7 @@ const Timeline = async ({
   const user = await db.user.findUnique({
     where: { username: resolvedParams.username },
     include: {
+      followers: true,
       likers: true,
       receivedComments: { include: { author: true } },
     },

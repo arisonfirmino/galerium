@@ -21,6 +21,7 @@ const ProfilePage = async () => {
   const user = await db.user.findUnique({
     where: { id: session.user.id },
     include: {
+      followers: true,
       likers: true,
       receivedComments: { include: { author: true } },
     },

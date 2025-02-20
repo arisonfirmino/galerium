@@ -20,7 +20,10 @@ const ProfilePage = async () => {
 
   const user = await db.user.findUnique({
     where: { id: session.user.id },
-    include: { receivedComments: { include: { author: true } } },
+    include: {
+      likers: true,
+      receivedComments: { include: { author: true } },
+    },
   });
 
   if (!user) redirect("/");

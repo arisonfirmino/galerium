@@ -16,7 +16,7 @@ const ProfileActions = ({
   return (
     <div className="flex items-center gap-5">
       <div className="flex gap-2.5">
-        <LikeButton />
+        <LikeButton likerId={authorId} likedId={recipientId} />
         <ShareButton />
       </div>
 

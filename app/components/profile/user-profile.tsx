@@ -11,10 +11,12 @@ import Bio from "@/app/components/profile/bio";
 import Location from "@/app/components/profile/location";
 import Count from "@/app/components/profile/count";
 
-import { User } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 interface UserProfileProps {
-  user: User;
+  user: Prisma.UserGetPayload<{
+    include: { likers: true };
+  }>;
 }
 
 const UserProfile = ({ user }: UserProfileProps) => {
@@ -34,7 +36,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
 
         <div className="flex items-center gap-5">
           <Count field="gallery" count={user.gallery.length} />
-          <Count field="likes" count={350} />
+          <Count field="likes" count={user.likers.length} />
           <Count field="followers" count={250} />
         </div>
       </CardFooter>

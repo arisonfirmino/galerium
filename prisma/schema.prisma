@@ -20,12 +20,30 @@ model User {
   location String?
   gallery  String[]
 
+  likedUsers Like[] @relation("likers")
+  likers     Like[] @relation("likedUsers")
+
   comments         Comment[] @relation("author")
   receivedComments Comment[] @relation("receivedComments")
 
   created_at DateTime @default(now())
 
   @@map("users")
+}
+
+model Like {
+  id String @id @default(cuid()) @map("_id")
+
+  liker   User   @relation("likers", fields: [likerId], references: [id])
+  likerId String
+
+  liked   User   @relation("likedUsers", fields: [likedId], references: [id])
+  likedId String
+
+  created_at DateTime @default(now())
+
+  @@unique([likerId, likedId])
+  @@map("likes")
 }
 
 model Comment {

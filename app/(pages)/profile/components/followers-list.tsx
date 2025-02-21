@@ -50,8 +50,8 @@ const FollowersList = ({ followers }: FollowersListProps) => {
             <li key={user.id} className="flex items-center justify-between">
               <Identity user={user.follower} />
               <FollowButton
-                followerId={user.followerId}
-                followingId={user.followingId}
+                followerId={user.followingId}
+                followingId={user.followerId}
               />
             </li>
           ))}

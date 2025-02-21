@@ -22,7 +22,7 @@ const Identity = ({ user }: IdentityProps) => {
       )}
       <div>
         <div className="flex items-center gap-2">
-          <p className="text-base font-medium">
+          <p className="text-base font-medium capitalize">
             {user.firstName} {user.lastName}
           </p>
           {isVerified && <VerifiedBadge />}

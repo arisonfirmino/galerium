@@ -12,7 +12,7 @@ import {
 import Identity from "@/app/components/identity";
 import LikeButton from "@/app/components/like-button";
 
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRightIcon, HeartIcon } from "lucide-react";
 
 import { Prisma } from "@prisma/client";
 
@@ -31,7 +31,10 @@ const LikedProfiles = ({ likedUsers }: LikedProfilesProps) => {
           "h-8 w-full justify-between",
         )}
       >
-        Curtidas
+        <div className="flex items-center gap-2">
+          <HeartIcon size={16} />
+          Curtidas
+        </div>
         <ChevronRightIcon size={16} />
       </SheetTrigger>
       <SheetContent className={cn("space-y-5")}>
@@ -42,7 +45,7 @@ const LikedProfiles = ({ likedUsers }: LikedProfilesProps) => {
           </SheetDescription>
         </SheetHeader>
 
-        <ul>
+        <ul className="space-y-3">
           {likedUsers.map((user) => (
             <li key={user.id} className="flex items-center justify-between">
               <Identity user={user.liked} />

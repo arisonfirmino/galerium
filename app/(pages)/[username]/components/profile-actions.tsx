@@ -1,4 +1,4 @@
-import LikeButton from "@/app/(pages)/[username]/components/like-button";
+import LikeButton from "@/app/components/like-button";
 import ShareButton from "@/app/components/share-button";
 import CommentForm from "@/app/(pages)/[username]/components/comment-form";
 

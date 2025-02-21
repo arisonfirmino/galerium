@@ -2,10 +2,12 @@ import GallerySettings from "@/app/(pages)/profile/components/gallery-settings";
 import ProfileSettings from "@/app/(pages)/profile/components/profile-settings";
 import UserActivity from "@/app/(pages)/profile/components/user-activity";
 
-import { User } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 interface SettingsProps {
-  user: User;
+  user: Prisma.UserGetPayload<{
+    include: { likedUsers: { include: { liked: true } } };
+  }>;
 }
 
 const Settings = ({ user }: SettingsProps) => {
@@ -13,7 +15,7 @@ const Settings = ({ user }: SettingsProps) => {
     <div className="flex w-full max-w-[698px] flex-col gap-5 md:flex-row">
       <GallerySettings user={user} />
       <ProfileSettings user={user} />
-      <UserActivity />
+      <UserActivity user={user} />
     </div>
   );
 };

@@ -23,6 +23,7 @@ const ProfilePage = async () => {
     include: {
       followers: true,
       likers: true,
+      likedUsers: { include: { liked: true } },
       receivedComments: { include: { author: true } },
     },
   });

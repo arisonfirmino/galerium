@@ -6,11 +6,20 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/app/components/ui/accordion";
+import LikedProfiles from "@/app/(pages)/profile/components/liked-profiles";
 import SignOutButton from "@/app/(pages)/profile/components/signout-button";
 
 import { ChartNoAxesCombinedIcon } from "lucide-react";
 
-const UserActivity = () => {
+import { Prisma } from "@prisma/client";
+
+interface UserActivityProps {
+  user: Prisma.UserGetPayload<{
+    include: { likedUsers: { include: { liked: true } } };
+  }>;
+}
+
+const UserActivity = ({ user }: UserActivityProps) => {
   return (
     <Accordion type="single" collapsible className={cn("w-full")}>
       <AccordionItem value="user-activity">
@@ -20,7 +29,8 @@ const UserActivity = () => {
             Sua atividade
           </div>
         </AccordionTrigger>
-        <AccordionContent>
+        <AccordionContent className={cn("space-y-3")}>
+          <LikedProfiles likedUsers={user.likedUsers} />
           <SignOutButton />
         </AccordionContent>
       </AccordionItem>

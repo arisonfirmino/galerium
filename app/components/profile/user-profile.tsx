@@ -5,8 +5,8 @@ import { useSession } from "next-auth/react";
 import { cn } from "@/app/lib/utils";
 
 import { Card, CardHeader, CardFooter } from "@/app/components/ui/card";
-import Identity from "@/app/components/profile/identity";
-import FollowButton from "@/app/components/profile/follow-button";
+import Identity from "@/app/components/identity";
+import FollowButton from "@/app/components/follow-button";
 import Bio from "@/app/components/profile/bio";
 import Location from "@/app/components/profile/location";
 import Count from "@/app/components/profile/count";

@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/app/components/ui/accordion";
+import FollowersList from "@/app/(pages)/profile/components/followers-list";
 import LikedProfiles from "@/app/(pages)/profile/components/liked-profiles";
 import SignOutButton from "@/app/(pages)/profile/components/signout-button";
 
@@ -15,7 +16,10 @@ import { Prisma } from "@prisma/client";
 
 interface UserActivityProps {
   user: Prisma.UserGetPayload<{
-    include: { likedUsers: { include: { liked: true } } };
+    include: {
+      likedUsers: { include: { liked: true } };
+      followers: { include: { follower: true } };
+    };
   }>;
 }
 
@@ -30,6 +34,7 @@ const UserActivity = ({ user }: UserActivityProps) => {
           </div>
         </AccordionTrigger>
         <AccordionContent className={cn("space-y-3")}>
+          <FollowersList followers={user.followers} />
           <LikedProfiles likedUsers={user.likedUsers} />
           <SignOutButton />
         </AccordionContent>

@@ -10,19 +10,19 @@ import {
   SheetDescription,
 } from "@/app/components/ui/sheet";
 import Identity from "@/app/components/identity";
-import LikeButton from "@/app/components/like-button";
+import FollowButton from "@/app/components/follow-button";
 
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRightIcon, UsersIcon } from "lucide-react";
 
 import { Prisma } from "@prisma/client";
 
-interface LikedProfilesProps {
-  likedUsers: Prisma.LikeGetPayload<{
-    include: { liked: true };
+interface FollowersListProps {
+  followers: Prisma.FollowGetPayload<{
+    include: { follower: true };
   }>[];
 }
 
-const LikedProfiles = ({ likedUsers }: LikedProfilesProps) => {
+const FollowersList = ({ followers }: FollowersListProps) => {
   return (
     <Sheet>
       <SheetTrigger
@@ -31,22 +31,28 @@ const LikedProfiles = ({ likedUsers }: LikedProfilesProps) => {
           "h-8 w-full justify-between",
         )}
       >
-        Curtidas
+        <div className="flex items-center gap-2">
+          <UsersIcon size={16} />
+          Seguidores
+        </div>
         <ChevronRightIcon size={16} />
       </SheetTrigger>
       <SheetContent className={cn("space-y-5")}>
         <SheetHeader>
-          <SheetTitle>Perfis curtidos</SheetTitle>
+          <SheetTitle>Meus Seguidores</SheetTitle>
           <SheetDescription>
-            Aqui estão todos os perfis que você curtiu.
+            Aqui estão as pessoas que estão te seguindo.
           </SheetDescription>
         </SheetHeader>
 
-        <ul>
-          {likedUsers.map((user) => (
+        <ul className="space-y-3">
+          {followers.map((user) => (
             <li key={user.id} className="flex items-center justify-between">
-              <Identity user={user.liked} />
-              <LikeButton likerId={user.likerId} likedId={user.likedId} />
+              <Identity user={user.follower} />
+              <FollowButton
+                followerId={user.followerId}
+                followingId={user.followingId}
+              />
             </li>
           ))}
         </ul>
@@ -55,4 +61,4 @@ const LikedProfiles = ({ likedUsers }: LikedProfilesProps) => {
   );
 };
 
-export default LikedProfiles;
+export default FollowersList;

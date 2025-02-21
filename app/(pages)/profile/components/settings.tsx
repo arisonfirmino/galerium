@@ -6,7 +6,10 @@ import { Prisma } from "@prisma/client";
 
 interface SettingsProps {
   user: Prisma.UserGetPayload<{
-    include: { likedUsers: { include: { liked: true } } };
+    include: {
+      likedUsers: { include: { liked: true } };
+      followers: { include: { follower: true } };
+    };
   }>;
 }
 

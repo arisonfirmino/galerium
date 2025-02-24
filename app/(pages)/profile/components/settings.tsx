@@ -9,6 +9,7 @@ interface SettingsProps {
     include: {
       likedUsers: { include: { liked: true } };
       followers: { include: { follower: true } };
+      following: { include: { following: true } };
     };
   }>;
 }

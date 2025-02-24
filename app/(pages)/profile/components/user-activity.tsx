@@ -13,12 +13,14 @@ import SignOutButton from "@/app/(pages)/profile/components/signout-button";
 import { ChartNoAxesCombinedIcon } from "lucide-react";
 
 import { Prisma } from "@prisma/client";
+import FolllowingList from "./following-list";
 
 interface UserActivityProps {
   user: Prisma.UserGetPayload<{
     include: {
       likedUsers: { include: { liked: true } };
       followers: { include: { follower: true } };
+      following: { include: { following: true } };
     };
   }>;
 }
@@ -35,6 +37,7 @@ const UserActivity = ({ user }: UserActivityProps) => {
         </AccordionTrigger>
         <AccordionContent className={cn("space-y-3")}>
           <FollowersList followers={user.followers} />
+          <FolllowingList following={user.following} />
           <LikedProfiles likedUsers={user.likedUsers} />
           <SignOutButton />
         </AccordionContent>

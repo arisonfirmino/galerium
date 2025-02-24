@@ -22,6 +22,7 @@ const ProfilePage = async () => {
     where: { id: session.user.id },
     include: {
       followers: { include: { follower: true } },
+      following: { include: { following: true } },
       likers: true,
       likedUsers: { include: { liked: true } },
       receivedComments: { include: { author: true } },

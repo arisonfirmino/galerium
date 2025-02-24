@@ -45,17 +45,23 @@ const FollowersList = ({ followers }: FollowersListProps) => {
           </SheetDescription>
         </SheetHeader>
 
-        <ul className="space-y-3">
-          {followers.map((user) => (
-            <li key={user.id} className="flex items-center justify-between">
-              <Identity user={user.follower} />
-              <FollowButton
-                followerId={user.followingId}
-                followingId={user.followerId}
-              />
-            </li>
-          ))}
-        </ul>
+        {followers.length > 0 ? (
+          <ul className="space-y-3">
+            {followers.map((user) => (
+              <li key={user.id} className="flex items-center justify-between">
+                <Identity user={user.follower} />
+                <FollowButton
+                  followerId={user.followingId}
+                  followingId={user.followerId}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-center text-sm text-muted-foreground">
+            Você ainda não tem seguidores.
+          </p>
+        )}
       </SheetContent>
     </Sheet>
   );

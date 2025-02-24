@@ -45,14 +45,20 @@ const LikedProfiles = ({ likedUsers }: LikedProfilesProps) => {
           </SheetDescription>
         </SheetHeader>
 
-        <ul className="space-y-3">
-          {likedUsers.map((user) => (
-            <li key={user.id} className="flex items-center justify-between">
-              <Identity user={user.liked} />
-              <LikeButton likerId={user.likerId} likedId={user.likedId} />
-            </li>
-          ))}
-        </ul>
+        {likedUsers.length > 0 ? (
+          <ul className="space-y-3">
+            {likedUsers.map((user) => (
+              <li key={user.id} className="flex items-center justify-between">
+                <Identity user={user.liked} />
+                <LikeButton likerId={user.likerId} likedId={user.likedId} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-center text-sm text-muted-foreground">
+            Você ainda não curtiu nenhum perfil.
+          </p>
+        )}
       </SheetContent>
     </Sheet>
   );

@@ -7,13 +7,14 @@ import {
   AccordionContent,
 } from "@/app/components/ui/accordion";
 import FollowersList from "@/app/(pages)/profile/components/followers-list";
+import FolllowingList from "@/app/(pages)/profile/components/following-list";
 import LikedProfiles from "@/app/(pages)/profile/components/liked-profiles";
+import UserComments from "@/app/(pages)/profile/components/user-comments";
 import SignOutButton from "@/app/(pages)/profile/components/signout-button";
 
 import { ChartNoAxesCombinedIcon } from "lucide-react";
 
 import { Prisma } from "@prisma/client";
-import FolllowingList from "./following-list";
 
 interface UserActivityProps {
   user: Prisma.UserGetPayload<{
@@ -21,6 +22,7 @@ interface UserActivityProps {
       likedUsers: { include: { liked: true } };
       followers: { include: { follower: true } };
       following: { include: { following: true } };
+      comments: { include: { author: true; recipient: true } };
     };
   }>;
 }
@@ -39,6 +41,7 @@ const UserActivity = ({ user }: UserActivityProps) => {
           <FollowersList followers={user.followers} />
           <FolllowingList following={user.following} />
           <LikedProfiles likedUsers={user.likedUsers} />
+          <UserComments comments={user.comments} />
           <SignOutButton />
         </AccordionContent>
       </AccordionItem>

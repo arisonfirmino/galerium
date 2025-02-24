@@ -10,6 +10,7 @@ interface SettingsProps {
       likedUsers: { include: { liked: true } };
       followers: { include: { follower: true } };
       following: { include: { following: true } };
+      comments: { include: { author: true; recipient: true } };
     };
   }>;
 }

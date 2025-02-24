@@ -26,6 +26,10 @@ const ProfilePage = async () => {
       likers: true,
       likedUsers: { include: { liked: true } },
       receivedComments: { include: { author: true } },
+      comments: {
+        include: { author: true, recipient: true },
+        orderBy: { created_at: "desc" },
+      },
     },
   });
 

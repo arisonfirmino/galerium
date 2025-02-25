@@ -34,7 +34,7 @@ const Timeline = async ({
 
   return (
     <Container>
-      <section className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+      <section className="order-3 flex w-full flex-col items-center justify-center gap-5 md:order-2 md:flex-row">
         <div className="w-full max-w-md space-y-5">
           <UserProfile user={user} />
           {session &&

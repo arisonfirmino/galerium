@@ -37,7 +37,7 @@ const ProfilePage = async () => {
 
   return (
     <Container>
-      <div className="flex w-full flex-col justify-center gap-5 md:flex-row">
+      <div className="order-2 flex w-full flex-col justify-center gap-5 md:flex-row">
         <div className="w-full max-w-md space-y-5">
           <UserProfile user={user} />
           {user.receivedComments.length > 0 ? (
@@ -58,7 +58,7 @@ const ProfilePage = async () => {
         )}
       </div>
 
-      <Separator className={cn("max-w-[698px]")} />
+      <Separator className={cn("order-3 max-w-[698px]")} />
 
       <Settings user={user} />
     </Container>

@@ -16,15 +16,17 @@ const Loading = () => {
         <Skeleton className="aspect-square w-full md:max-w-[230px]" />
       </div>
 
-      <div className="flex items-center gap-1">
-        <Skeleton className="h-10 w-[109px]" />
+      <div className="flex items-center gap-4">
+        <Skeleton className="h-8 w-8 rounded-full" />
 
-        <Skeleton className="h-10 w-10" />
-        <Skeleton className="h-10 w-10" />
-        <Skeleton className="h-10 w-10" />
-        <Skeleton className="h-10 w-10" />
+        <div className="flex gap-2.5">
+          <Skeleton className="h-10 w-10" />
+          <Skeleton className="h-10 w-10" />
+          <Skeleton className="h-10 w-10" />
+          <Skeleton className="h-10 w-10" />
+        </div>
 
-        <Skeleton className="h-10 w-[109px]" />
+        <Skeleton className="h-8 w-8 rounded-full" />
       </div>
     </main>
   );

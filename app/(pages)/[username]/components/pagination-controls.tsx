@@ -47,7 +47,7 @@ const PaginationControls = async () => {
       : [loggedInUser, creator, ...otherUsers];
 
   return (
-    <Carousel className={cn("max-w-full")}>
+    <Carousel className={cn("order-2 max-w-full md:order-3")}>
       <CarouselContent className={cn("w-full space-x-2.5 md:max-w-60")}>
         {sortedUsers.map((user) => (
           <Link key={user.id} href={`/${user.username}`}>

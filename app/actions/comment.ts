@@ -33,3 +33,30 @@ export const addComment = async ({
 
   revalidatePath("/");
 };
+
+export const deleteComment = async ({
+  authorId,
+  commentId,
+}: {
+  authorId: string;
+  commentId: string;
+}) => {
+  if (!authorId) return { error: "ID do autor é obrigatório." };
+  if (!commentId) return { error: "ID do comentário é obrigatório." };
+
+  const [author, comment] = await Promise.all([
+    db.user.findUnique({ where: { id: authorId } }),
+    db.comment.findUnique({ where: { id: commentId } }),
+  ]);
+
+  if (!author) return { error: "Autor não encontrado." };
+  if (!comment) return { error: "Comentário não encontrado." };
+  if (authorId !== comment.authorId)
+    return { error: "Você só pode excluir seus próprios comentários." };
+
+  await db.comment.delete({
+    where: { id: comment.id },
+  });
+
+  revalidatePath("/");
+};

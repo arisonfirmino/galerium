@@ -41,7 +41,7 @@ const UserActivity = ({ user }: UserActivityProps) => {
           <FollowersList followers={user.followers} />
           <FolllowingList following={user.following} />
           <LikedProfiles likedUsers={user.likedUsers} />
-          <UserComments comments={user.comments} />
+          <UserComments comments={user.comments} userId={user.id} />
           <SignOutButton />
         </AccordionContent>
       </AccordionItem>

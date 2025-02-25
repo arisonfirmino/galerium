@@ -19,9 +19,10 @@ interface UserCommentsProps {
   comments: Prisma.CommentGetPayload<{
     include: { author: true; recipient: true };
   }>[];
+  userId: string;
 }
 
-const UserComments = ({ comments }: UserCommentsProps) => {
+const UserComments = ({ comments,userId }: UserCommentsProps) => {
   return (
     <Sheet>
       <SheetTrigger
@@ -50,10 +51,10 @@ const UserComments = ({ comments }: UserCommentsProps) => {
         </SheetHeader>
 
         {comments.length > 0 ? (
-          <ul className="space-y-3">
+          <ul className="space-y-5">
             {comments.map((comment) => (
               <li key={comment.id}>
-                <UserCommentItem comment={comment} />
+                <UserCommentItem comment={comment} userId={userId}/>
               </li>
             ))}
           </ul>

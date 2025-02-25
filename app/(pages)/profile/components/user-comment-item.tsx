@@ -1,7 +1,14 @@
 import { cn } from "@/app/lib/utils";
 
-import { Card, CardContent, CardHeader } from "@/app/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/app/components/ui/card";
 import CommentAvatar from "@/app/(pages)/profile/components/comment-avatar";
+import { Separator } from "@/app/components/ui/separator";
+import DeleteCommentButton from "@/app/(pages)/profile/components/delete-comment-button";
 
 import { ArrowRightLeftIcon } from "lucide-react";
 
@@ -13,9 +20,10 @@ interface UserCommentItemProps {
   comment: Prisma.CommentGetPayload<{
     include: { author: true; recipient: true };
   }>;
+  userId: string;
 }
 
-const UserCommentItem = ({ comment }: UserCommentItemProps) => {
+const UserCommentItem = ({ comment, userId }: UserCommentItemProps) => {
   return (
     <Card className={cn("space-y-1 border-none bg-transparent shadow-none")}>
       <CardHeader className={cn("flex items-center justify-between")}>
@@ -41,6 +49,12 @@ const UserCommentItem = ({ comment }: UserCommentItemProps) => {
       <CardContent>
         <p className="line-clamp-2">{comment.text}</p>
       </CardContent>
+
+      <Separator />
+
+      <CardFooter>
+        <DeleteCommentButton authorId={userId} commentId={comment.id} />
+      </CardFooter>
     </Card>
   );
 };

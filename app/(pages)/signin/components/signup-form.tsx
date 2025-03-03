@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+import Hint from "@/app/(pages)/signin/components/hint";
 import { Input } from "@/app/components/ui/input";
 import SubmitButton from "@/app/components/submit-button";
 
@@ -47,6 +49,8 @@ const schema = yup.object({
 type FormData = yup.InferType<typeof schema>;
 
 const SignUpForm = () => {
+  const [hintMessage, setHintMessage] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -56,6 +60,32 @@ const SignUpForm = () => {
     resolver: yupResolver(schema),
   });
 
+  const handleFocus = (field: string) => {
+    switch (field) {
+      case "username":
+        setHintMessage(
+          "Pense bem! Este será seu nome fixo e não poderá ser alterado depois.",
+        );
+        break;
+      case "email":
+        setHintMessage(
+          "O e-mail informado será fixo e não poderá ser atualizado.",
+        );
+        break;
+      case "password":
+        setHintMessage(
+          "Defina uma senha segura. Ela não poderá ser alterada depois.",
+        );
+        break;
+      default:
+        setHintMessage("");
+    }
+  };
+
+  const handleBlur = () => {
+    setHintMessage("");
+  };
+
   const onSubmit = async (data: FormData) => {
     console.log(data);
     reset();
@@ -63,6 +93,8 @@ const SignUpForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-10 w-full space-y-5">
+      {hintMessage && <Hint message={hintMessage} />}
+
       <Input
         placeholder="Nome"
         {...register("firstName")}
@@ -75,12 +107,20 @@ const SignUpForm = () => {
         error={errors.lastName}
       />
 
-      <Input placeholder="E-mail" {...register("email")} error={errors.email} />
+      <Input
+        placeholder="E-mail"
+        {...register("email")}
+        error={errors.email}
+        onFocus={() => handleFocus("email")}
+        onBlur={handleBlur}
+      />
 
       <Input
         placeholder="Nome de usuário"
         {...register("username")}
         error={errors.username}
+        onFocus={() => handleFocus("username")}
+        onBlur={handleBlur}
       />
 
       <Input
@@ -88,6 +128,8 @@ const SignUpForm = () => {
         placeholder="Senha"
         {...register("password")}
         error={errors.password}
+        onFocus={() => handleFocus("password")}
+        onBlur={handleBlur}
       />
 
       <Input

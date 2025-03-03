@@ -1,6 +1,8 @@
 import Link from "next/link";
 
-import { UserIcon } from "lucide-react";
+import UserIcon from "@/app/components/header/user-icon";
+
+// import { UserIcon } from "lucide-react";
 
 const ProfileLink = () => {
   return (
@@ -8,7 +10,8 @@ const ProfileLink = () => {
       href="/profile"
       className="flex items-center justify-center rounded-2xl md:h-10 md:w-10"
     >
-      <UserIcon size={20} />
+      <UserIcon />
+      {/* <UserIcon size={20} /> */}
     </Link>
   );
 };

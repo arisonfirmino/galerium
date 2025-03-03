@@ -1,4 +1,6 @@
-import { SunIcon, UserIcon } from "lucide-react";
+import ThemeSwitch from "@/app/components/theme-switch";
+
+import { UserIcon } from "lucide-react";
 
 const Header = () => {
   return (
@@ -6,7 +8,7 @@ const Header = () => {
       <h1 className="dancing-script text-2xl font-bold">Galerium</h1>
 
       <div className="flex items-center gap-5">
-        <SunIcon size={20} />
+        <ThemeSwitch />
         <UserIcon size={20} />
       </div>
     </header>

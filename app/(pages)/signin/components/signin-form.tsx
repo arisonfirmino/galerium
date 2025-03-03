@@ -53,7 +53,7 @@ const SignInForm = () => {
       />
 
       {errors && (
-        <p className="text-xs text-red-600">
+        <p className="text-center text-xs text-red-600">
           {errors.identify?.message || errors.password?.message}
         </p>
       )}

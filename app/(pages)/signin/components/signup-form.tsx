@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -15,6 +17,8 @@ import {
 } from "@/app/helpers/checkUser";
 
 import { createAccount } from "@/app/actions/user";
+
+import { signIn } from "next-auth/react";
 
 import { toast } from "sonner";
 
@@ -60,6 +64,8 @@ type FormData = yup.InferType<typeof schema>;
 const SignUpForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hintMessage, setHintMessage] = useState("");
+
+  const router = useRouter();
 
   const {
     register,
@@ -135,7 +141,15 @@ const SignUpForm = () => {
 
     reset();
     setIsLoading(false);
+
+    await signIn("credentials", {
+      redirect: false,
+      identifier: data.email,
+      password: data.password,
+    });
+
     toast(`Bem vindo(a), ${data.firstName}.`);
+    router.replace(`/${data.username}`);
   };
 
   return (

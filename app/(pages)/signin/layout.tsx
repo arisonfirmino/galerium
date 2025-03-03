@@ -2,12 +2,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/auth";
 import { redirect } from "next/navigation";
 
-const Home = async () => {
+const ProvateLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await getServerSession(authOptions);
 
-  if (!session) redirect("/signin");
+  if (session) redirect(`/${session.user.username}`);
 
-  redirect(`/${session.user.username}`);
+  return children;
 };
 
-export default Home;
+export default ProvateLayout;

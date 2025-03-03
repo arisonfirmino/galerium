@@ -25,3 +25,41 @@ export const isUsernameRegistered = async ({
 
   return !!user;
 };
+
+export const isUserRegistered = async ({
+  identifier,
+}: {
+  identifier: string;
+}) => {
+  if (!identifier) return false;
+
+  const user = await db.user.findFirst({
+    where: {
+      OR: [{ email: identifier }, { username: identifier }],
+    },
+  });
+
+  return !!user;
+};
+
+export const isPasswordCorrect = async ({
+  identifier,
+  password,
+}: {
+  identifier: string;
+  password: string;
+}) => {
+  if (!identifier || !password) return false;
+
+  const user = await db.user.findFirst({
+    where: {
+      OR: [{ email: identifier }, { username: identifier }],
+    },
+  });
+
+  if (!user) return false;
+
+  const isPasswordValid = user.password === password;
+
+  return isPasswordValid;
+};

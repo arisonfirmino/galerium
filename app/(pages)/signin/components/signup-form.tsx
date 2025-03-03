@@ -9,6 +9,15 @@ import Hint from "@/app/(pages)/signin/components/hint";
 import { Input } from "@/app/components/ui/input";
 import SubmitButton from "@/app/components/submit-button";
 
+import {
+  isEmailRegistered,
+  isUsernameRegistered,
+} from "@/app/helpers/checkUser";
+
+import { createAccount } from "@/app/actions/user";
+
+import { toast } from "sonner";
+
 const schema = yup.object({
   firstName: yup
     .string()
@@ -49,11 +58,13 @@ const schema = yup.object({
 type FormData = yup.InferType<typeof schema>;
 
 const SignUpForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [hintMessage, setHintMessage] = useState("");
 
   const {
     register,
     handleSubmit,
+    setError,
     reset,
     formState: { errors },
   } = useForm({
@@ -87,8 +98,44 @@ const SignUpForm = () => {
   };
 
   const onSubmit = async (data: FormData) => {
-    console.log(data);
+    setIsLoading(true);
+
+    const emailExists = await isEmailRegistered({ email: data.email });
+    const usernameExists = await isUsernameRegistered({
+      username: data.username,
+    });
+
+    if (emailExists) {
+      setError("email", {
+        type: "manual",
+        message: "Este e-mail já está em uso. Tente outro.",
+      });
+
+      setIsLoading(false);
+      return;
+    }
+
+    if (usernameExists) {
+      setError("username", {
+        type: "manual",
+        message: "Este nome de usuário já está em uso. Tente outro.",
+      });
+
+      setIsLoading(false);
+      return;
+    }
+
+    await createAccount({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      username: data.username,
+      password: data.password,
+    });
+
     reset();
+    setIsLoading(false);
+    toast(`Bem vindo(a), ${data.firstName}.`);
   };
 
   return (
@@ -150,7 +197,7 @@ const SignUpForm = () => {
         </p>
       )}
 
-      <SubmitButton>Cadastrar</SubmitButton>
+      <SubmitButton isLoading={isLoading}>Cadastrar</SubmitButton>
     </form>
   );
 };

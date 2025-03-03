@@ -2,12 +2,13 @@ import { Button } from "@/app/components/ui/button";
 
 interface SubmitButtonProps {
   children: React.ReactNode;
+  isLoading: boolean;
 }
 
-const SubmitButton = ({ children }: SubmitButtonProps) => {
+const SubmitButton = ({ children, isLoading }: SubmitButtonProps) => {
   return (
     <Button type="submit" className="w-full">
-      {children}
+      {isLoading ? "Carregando" : children}
     </Button>
   );
 };

@@ -1,12 +1,27 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
+import ThemeSwitch from "@/app/components/theme-switch";
+
+import HomeLink from "@/app/components/header/home-link";
+import ProfileLink from "@/app/components/header/profile-link";
+
 import Title from "@/app/components/ui/title";
-import ProfileSwitcher from "@/app/components/header/profile-switcher";
 
 const Header = () => {
+  const pathname = usePathname();
+
   return (
-    <header className="flex items-center justify-between p-5 md:hidden">
-      <Title />
-      <ProfileSwitcher />
-    </header>
+    pathname !== "/signin" && (
+      <header className="flex items-center justify-between p-5 md:hidden">
+        <Title />
+        <div className="flex items-center gap-5">
+          <ThemeSwitch />
+          {pathname === "/profile" ? <HomeLink /> : <ProfileLink />}
+        </div>
+      </header>
+    )
   );
 };
 

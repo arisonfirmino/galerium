@@ -26,7 +26,7 @@ const UsersList = ({ users }: UsersListProps) => {
 
   return (
     <Carousel>
-      <CarouselContent className="w-full space-x-2.5">
+      <CarouselContent className="w-full space-x-2.5 px-5 md:px-0">
         {users.map((user) => (
           <CarouselItem
             key={user.id}

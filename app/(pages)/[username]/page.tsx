@@ -3,6 +3,7 @@ import { authOptions } from "@/app/lib/auth";
 
 import { getUser, getUsers } from "@/app/helpers/getUser";
 
+import Search from "@/app/(pages)/[username]/components/search";
 import UsersList from "@/app/(pages)/[username]/components/users-list";
 import UserProfile from "@/app/components/profile/user-profile";
 import ProfileActions from "@/app/(pages)/[username]/components/actions/profile-actions";
@@ -23,16 +24,20 @@ const Timeline = async ({
   if (!user) return null;
 
   return (
-    <div className="flex min-h-screen w-full justify-center px-5 md:items-center md:px-0">
+    <div className="flex min-h-screen w-full justify-center md:items-center">
+      <Search users={users} />
+
       <div className="w-full max-w-md space-y-5">
         <UsersList users={users} />
-        <UserProfile user={user} />
-        {session &&
-          (session.user.id === user.id ? (
-            <ProfileControls />
-          ) : (
-            <ProfileActions />
-          ))}
+        <div className="space-y-5 px-5 md:px-0">
+          <UserProfile user={user} />
+          {session &&
+            (session.user.id === user.id ? (
+              <ProfileControls />
+            ) : (
+              <ProfileActions />
+            ))}
+        </div>
       </div>
     </div>
   );

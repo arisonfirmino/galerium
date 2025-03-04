@@ -43,6 +43,7 @@ export const authOptions: AuthOptions = {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.username = token.username as string;
+        session.user.image = token.image as string;
       }
 
       return session;
@@ -51,6 +52,7 @@ export const authOptions: AuthOptions = {
       if (user) {
         token.id = user.id;
         token.username = user.username;
+        token.image = user.image;
       }
 
       return token;

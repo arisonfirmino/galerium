@@ -7,6 +7,12 @@ import { authOptions } from "@/app/lib/auth";
 export const getUser = async ({ username }: { username: string }) => {
   const user = await db.user.findUnique({
     where: { username },
+    include: {
+      commentsReceived: {
+        include: { writer: true },
+        orderBy: { created_at: "desc" },
+      },
+    },
   });
 
   return user;

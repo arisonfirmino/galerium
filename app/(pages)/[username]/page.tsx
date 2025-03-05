@@ -8,6 +8,7 @@ import UsersList from "@/app/(pages)/[username]/components/users-list";
 import UserProfile from "@/app/components/profile/user-profile";
 import ProfileActions from "@/app/(pages)/[username]/components/actions/profile-actions";
 import ProfileControls from "@/app/(pages)/[username]/components/actions/profile-controls";
+import CommentList from "@/app/components/comment/comment-list";
 
 const Timeline = async ({
   params,
@@ -29,14 +30,15 @@ const Timeline = async ({
 
       <div className="w-full max-w-md space-y-5">
         <UsersList users={users} />
-        <div className="space-y-5 px-5 md:px-0">
+        <div className="flex flex-col gap-5 px-5 md:px-0">
           <UserProfile user={user} />
           {session &&
             (session.user.id === user.id ? (
               <ProfileControls />
             ) : (
-              <ProfileActions />
+              <ProfileActions user={user} />
             ))}
+          <CommentList comments={user.commentsReceived} />
         </div>
       </div>
     </div>

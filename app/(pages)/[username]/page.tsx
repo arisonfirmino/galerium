@@ -38,7 +38,10 @@ const Timeline = async ({
             ) : (
               <ProfileActions user={user} />
             ))}
-          <CommentList comments={user.commentsReceived} />
+
+          <div className="right-10 bottom-10 w-full max-w-md xl:fixed xl:max-w-xs">
+            <CommentList comments={user.commentsReceived} />
+          </div>
         </div>
       </div>
     </div>

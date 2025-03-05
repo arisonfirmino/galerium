@@ -28,7 +28,7 @@ const CommentList = ({ comments }: CommentListProps) => {
   if (comments.length === 0) return null;
 
   return (
-    <ul className="right-10 bottom-10 w-full max-w-md xl:fixed xl:max-w-xs">
+    <ul>
       <li
         key={comments[currentIndex].id}
         className="animate-fade-left animate-duration-800"

@@ -15,7 +15,7 @@ const ThemeSwitch = () => {
     return (
       <LoaderCircleIcon
         size={16}
-        className="text-muted-foreground animate-spin"
+        className="text-muted-foreground order-1 animate-spin md:order-2"
       />
     );
 

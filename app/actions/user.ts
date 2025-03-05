@@ -42,3 +42,30 @@ export const createAccount = async ({
 
   revalidatePath("/");
 };
+
+interface UpdateUserAvatarProps {
+  userId: string;
+  avatar: string;
+}
+
+export const updateUserAvatar = async ({
+  userId,
+  avatar,
+}: UpdateUserAvatarProps) => {
+  if (!userId || !avatar) throw new Error("Todos os campos são obrigatórios.");
+
+  const user = await db.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!user) throw new Error("Usuário não encontrado.");
+
+  if (user.image) throw new Error("O usuário já possui um avatar.");
+
+  await db.user.update({
+    where: { id: userId },
+    data: { image: avatar },
+  });
+
+  revalidatePath("/");
+};

@@ -4,10 +4,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/app/components/ui/accordion";
+import AvatarControl from "@/app/(pages)/profile/components/avatar-control";
 
 import { UserPenIcon } from "lucide-react";
 
-const ProfileSettings = () => {
+import { User } from "@prisma/client";
+
+interface ProfileSettingsProps {
+  user: User;
+}
+
+const ProfileSettings = ({ user }: ProfileSettingsProps) => {
   return (
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="gallery">
@@ -17,7 +24,9 @@ const ProfileSettings = () => {
             Editar perfil
           </div>
         </AccordionTrigger>
-        <AccordionContent>Configurações do perfil</AccordionContent>
+        <AccordionContent>
+          <AvatarControl user={user} />
+        </AccordionContent>
       </AccordionItem>
     </Accordion>
   );

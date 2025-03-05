@@ -12,7 +12,7 @@ const Settings = ({ user }: SettingsProps) => {
   return (
     <div className="flex w-full max-w-[698px] flex-col gap-5 md:flex-row">
       <GallerySettings />
-      <ProfileSettings />
+      <ProfileSettings user={user} />
       <ActivitySettings />
     </div>
   );

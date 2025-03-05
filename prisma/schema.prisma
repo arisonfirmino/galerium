@@ -19,12 +19,30 @@ model User {
   bio      String?
   location String?
 
+  likesGiven Like[] @relation("likesGiven")
+  likedBy    Like[] @relation("likedBy")
+
   writtenComments  Comment[] @relation("writer")
   commentsReceived Comment[] @relation("receiver")
 
   created_at DateTime @default(now())
 
   @@map("users")
+}
+
+model Like {
+  id String @id @default(cuid()) @map("_id")
+
+  likingUser   User   @relation("likesGiven", fields: [likingUserId], references: [id])
+  likingUserId String
+
+  likedUser   User   @relation("likedBy", fields: [likedUserId], references: [id])
+  likedUserId String
+
+  created_at DateTime @default(now())
+
+  @@unique([likingUserId, likedUserId])
+  @@map("likes")
 }
 
 model Comment {

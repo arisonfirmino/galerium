@@ -8,6 +8,7 @@ export const getUser = async ({ username }: { username: string }) => {
   const user = await db.user.findUnique({
     where: { username },
     include: {
+      likedBy: true,
       commentsReceived: {
         include: { writer: true },
         orderBy: { created_at: "desc" },

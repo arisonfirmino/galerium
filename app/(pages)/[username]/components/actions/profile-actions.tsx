@@ -12,7 +12,7 @@ const ProfileActions = ({ user }: ProfileActionsProps) => {
   return (
     <div className="flex items-center gap-5">
       <div className="flex gap-2.5">
-        <LikeButton />
+        <LikeButton likedUserId={user.id} />
         <ShareButton />
       </div>
 

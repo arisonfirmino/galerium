@@ -2,6 +2,9 @@ import Link from "next/link";
 
 import UserAvatar from "@/app/components/user-avatar";
 
+import { verifiedUsers } from "@/app/helpers/verifiedUsers";
+
+import VerifiedBadge from "@/app/components/VerifiedBadge";
 import { DotIcon } from "lucide-react";
 
 import { formatDate } from "@/app/helpers/formatDate";
@@ -15,6 +18,8 @@ interface CommentItemProps {
 }
 
 const CommentItem = ({ comment }: CommentItemProps) => {
+  const isVerified = verifiedUsers.includes(comment.writer.username);
+
   return (
     <div className="flex gap-2.5">
       <Link href={`/${comment.writer.username}`}>
@@ -22,7 +27,10 @@ const CommentItem = ({ comment }: CommentItemProps) => {
       </Link>
       <div>
         <div className="flex items-center">
-          <p className="text-sm font-medium">{comment.writer.username}</p>
+          <div className="flex items-center gap-1.5">
+            <p className="text-sm font-medium">{comment.writer.username}</p>
+            {isVerified && <VerifiedBadge />}
+          </div>
           <DotIcon size={20} className="text-muted-foreground" />
           <span className="text-muted-foreground text-xs">
             {formatDate(comment.created_at)}

@@ -14,9 +14,11 @@ const Header = () => {
 
   return (
     pathname !== "/signin" && (
-      <header className="flex items-center justify-between p-5 md:hidden">
-        <Title />
-        <div className="flex items-center gap-5">
+      <header className="flex items-center justify-between p-5 md:fixed md:top-5 md:left-5 md:p-0 xl:top-10 xl:left-10">
+        <div className="md:hidden">
+          <Title />
+        </div>
+        <div className="flex items-center gap-5 md:gap-2.5">
           <ThemeSwitch />
           {pathname === "/profile" ? <HomeLink /> : <ProfileLink />}
         </div>

@@ -22,7 +22,7 @@ const ThemeSwitch = () => {
   return (
     <button
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      className="flex items-center justify-center rounded-2xl md:h-10 md:w-10"
+      className="order-1 flex cursor-pointer items-center justify-center rounded-2xl md:order-2 md:h-10 md:w-10"
     >
       {resolvedTheme === "dark" && <MoonIcon size={16} />}
       {resolvedTheme === "light" && <SunIcon size={16} />}

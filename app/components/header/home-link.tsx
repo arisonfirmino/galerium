@@ -6,7 +6,7 @@ const HomeLink = () => {
   return (
     <Link
       href="/"
-      className="flex items-center justify-center rounded-2xl md:h-10 md:w-10"
+      className="order-2 flex items-center justify-center rounded-2xl md:order-1 md:h-10 md:w-10"
     >
       <HomeIcon size={20} />
     </Link>

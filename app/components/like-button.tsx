@@ -47,7 +47,7 @@ const LikeButton = ({ likedUserId }: { likedUserId: string }) => {
       onClick={handleLikeClick}
       disabled={isLoading}
       size="action"
-      variant="secondary"
+      variant="outline"
     >
       {isLoading ? (
         <LoaderCircleIcon className="animate-spin" />

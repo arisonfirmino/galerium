@@ -4,7 +4,7 @@ import { Share2Icon } from "lucide-react";
 
 const ShareButton = () => {
   return (
-    <Button size="action" variant="secondary">
+    <Button size="action" variant="outline">
       <Share2Icon />
     </Button>
   );

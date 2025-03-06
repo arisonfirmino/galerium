@@ -19,6 +19,9 @@ model User {
   bio      String?
   location String?
 
+  following Follow[] @relation("followers")
+  followers Follow[] @relation("following")
+
   likesGiven Like[] @relation("likesGiven")
   likedBy    Like[] @relation("likedBy")
 
@@ -28,6 +31,21 @@ model User {
   created_at DateTime @default(now())
 
   @@map("users")
+}
+
+model Follow {
+  id String @id @default(cuid()) @map("_id")
+
+  follower   User   @relation("followers", fields: [followerId], references: [id])
+  followerId String
+
+  following   User   @relation("following", fields: [followingId], references: [id])
+  followingId String
+
+  created_at DateTime @default(now())
+
+  @@unique([followerId, followingId])
+  @@map("follows")
 }
 
 model Like {

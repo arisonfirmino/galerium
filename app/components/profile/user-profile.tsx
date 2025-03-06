@@ -14,6 +14,7 @@ import { Prisma } from "@prisma/client";
 interface UserProfileProps {
   user: Prisma.UserGetPayload<{
     include: {
+      followers: true;
       likedBy: true;
     };
   }>;
@@ -26,7 +27,9 @@ const UserProfile = ({ user }: UserProfileProps) => {
     <Card className="h-[170px] w-full justify-between">
       <CardHeader className="flex items-center justify-between">
         <Identify user={user} />
-        {session && session.user.id !== user.id && <FollowButton />}
+        {session && session.user.id !== user.id && (
+          <FollowButton followingId={user.id} />
+        )}
       </CardHeader>
 
       <Bio bio={user.bio} />
@@ -37,7 +40,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
         <div className="flex items-center gap-5">
           <Count field="gallery" count={10} />
           <Count field="likes" count={user.likedBy.length} />
-          <Count field="followers" count={250} />
+          <Count field="followers" count={user.followers.length} />
         </div>
       </CardFooter>
     </Card>

@@ -10,7 +10,7 @@ interface SettingsProps {
 
 const Settings = ({ user }: SettingsProps) => {
   return (
-    <div className="flex w-full max-w-[698px] flex-col gap-5 md:flex-row">
+    <div className="flex w-full flex-col gap-5 md:max-w-md lg:max-w-[698px] lg:flex-row">
       <GallerySettings />
       <ProfileSettings user={user} />
       <ActivitySettings />

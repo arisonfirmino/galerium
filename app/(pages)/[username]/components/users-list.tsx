@@ -25,13 +25,13 @@ const UsersList = ({ users }: UsersListProps) => {
   const pathname = usePathname();
 
   return (
-    <Carousel>
-      <CarouselContent className="w-full space-x-2.5 px-5 md:px-0">
+    <Carousel className="max-w-md">
+      <CarouselContent className="-ml-4 w-full space-x-2.5 px-5 md:px-0">
         {users.map((user) => (
           <CarouselItem
             key={user.id}
             className={cn(
-              "max-w-10",
+              "max-w-10 pl-4",
               pathname === `/${user.username}` ? "opacity-100" : "opacity-70",
             )}
           >
@@ -41,8 +41,8 @@ const UsersList = ({ users }: UsersListProps) => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="hidden md:flex" />
-      <CarouselNext className="hidden md:flex" />
+      <CarouselPrevious className="hidden lg:flex" />
+      <CarouselNext className="hidden lg:flex" />
     </Carousel>
   );
 };

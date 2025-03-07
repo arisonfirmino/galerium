@@ -38,7 +38,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
         <Location location={user.location} />
 
         <div className="flex items-center gap-5">
-          <Count field="gallery" count={10} />
+          <Count field="gallery" count={user.gallery.length} />
           <Count field="likes" count={user.likedBy.length} />
           <Count field="followers" count={user.followers.length} />
         </div>

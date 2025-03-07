@@ -19,6 +19,8 @@ model User {
   bio      String?
   location String?
 
+  gallery String[]
+
   following Follow[] @relation("followers")
   followers Follow[] @relation("following")
 
